@@ -21,7 +21,7 @@
         <h1>Create a user</h1>
         <hr>
         <%--@elvariable id="newUser" type=""--%>
-        <form:form method="POST" action="/admin/user/create" modelAttribute= "newUser">
+        <form:form method="POST" action="/admin/user/create/success" modelAttribute= "newUser">
             <div class="form-group mb-3">
                 <label class="form-label">Email address</label>
                 <form:input path="email" type="email" class="form-control"/>

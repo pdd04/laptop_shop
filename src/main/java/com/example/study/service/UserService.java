@@ -5,6 +5,9 @@ import com.example.study.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.ClientInfoStatus;
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -19,5 +22,13 @@ public class UserService {
 
     public User handleSaveUser(User user) {
         return this.userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    public List<User> getAllUsersByEmail(String email) {
+        return this.userRepository.findAllByEmail(email);
     }
 }
