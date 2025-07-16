@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label class="form-label">Email address</label>
-                    <form:input path="email" type="email" class="form-control"/>
+                    <form:input path="email" type="email" class="form-control" disabled="true"/>
                     <small id="emailHelp" class="form-text text-muted" >We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group mb-3">

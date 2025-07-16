@@ -40,7 +40,7 @@
                     <td>
                         <a type="button" class="btn btn-success" href="/admin/user/${user.id}">View</a>
                         <a type="button" class="btn btn-warning" href="/admin/user/update/${user.id}">Update</a>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a type="button" class="btn btn-danger" href="/admin/user/delete/${user.id}">Delete</a>
                     </td>
                 </tr>
                 </c:forEach>
