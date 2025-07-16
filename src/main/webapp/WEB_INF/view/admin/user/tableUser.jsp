@@ -39,7 +39,7 @@
                     <td>${user.fullname}</td>
                     <td>
                         <a type="button" class="btn btn-success" href="/admin/user/${user.id}">View</a>
-                        <button type="button" class="btn btn-warning">Update</button>
+                        <a type="button" class="btn btn-warning" href="/admin/user/update/${user.id}">Update</a>
                         <button type="button" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>

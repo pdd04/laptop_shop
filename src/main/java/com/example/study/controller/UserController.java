@@ -53,6 +53,25 @@ public class UserController {
         model.addAttribute("userDetail", userDetail);
         return "admin/user/userDetail";
     }
+    @RequestMapping("/admin/user/update/{userId}")
+    public String getUpdateUserPage(Model model, @PathVariable long userId){
+        User userDetail = this.userService.findbyId(userId);
+        model.addAttribute("userId", userId);
+        model.addAttribute("newUser", userDetail);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser")  User user) {
+        User userDetail = this.userService.findbyId(user.getId());
+        if (userDetail != null) {
+            userDetail.setAddress(user.getAddress());
+            userDetail.setEmail(user.getEmail());
+            userDetail.setFullname(user.getFullname());
+            this.userService.handleSaveUser(userDetail);
+        }
+        return "redirect:/admin/user";
+    }
 }
 
 //@RestController
