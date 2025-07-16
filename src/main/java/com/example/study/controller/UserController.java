@@ -45,6 +45,14 @@ public class UserController {
         model.addAttribute("users", arrUsers);
         return "admin/user/tableUser";
     }
+
+    @RequestMapping("/admin/user/{userId}")
+    public String getUserDetailPage(Model model, @PathVariable long userId) {
+        User userDetail = this.userService.findbyId(userId);
+        model.addAttribute("userId", userId);
+        model.addAttribute("userDetail", userDetail);
+        return "admin/user/userDetail";
+    }
 }
 
 //@RestController
