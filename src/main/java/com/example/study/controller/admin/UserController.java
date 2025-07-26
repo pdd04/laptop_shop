@@ -1,4 +1,4 @@
-package com.example.study.controller;
+package com.example.study.controller.admin;
 
 import com.example.study.domain.User;
 import com.example.study.repository.UserRepository;
@@ -43,7 +43,7 @@ public class UserController {
     public String getTableUsers(Model model) {
         List<User> arrUsers = this.userService.getAllUsers();
         model.addAttribute("users", arrUsers);
-        return "admin/user/tableUser";
+        return "admin/user/show";
     }
 
     @RequestMapping("/admin/user/{userId}")
@@ -51,7 +51,7 @@ public class UserController {
         User userDetail = this.userService.findbyId(userId);
         model.addAttribute("userId", userId);
         model.addAttribute("userDetail", userDetail);
-        return "admin/user/userDetail";
+        return "admin/user/detail";
     }
     @RequestMapping("/admin/user/update/{userId}")
     public String getUpdateUserPage(Model model, @PathVariable long userId){

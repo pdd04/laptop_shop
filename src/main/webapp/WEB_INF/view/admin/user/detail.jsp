@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Delete User - SB Admin</title>
+    <title>User Detail - SB Admin</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -27,29 +27,35 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Delete User</h1>
+                <h1 class="mt-4">User Detail</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active"><a href="/admin/user">Users</a></li>
-                    <li class="breadcrumb-item active">Delete User</li>
+                    <li class="breadcrumb-item active">User Detail</li>
                 </ol>
                 <div class="mt-5">
                     <div class="col-xl-12 mx-auto">
                         <div class="d-flex justify-content-center">
-                            <h3>User Delete</h3>
+                            <h3>User Detail</h3>
                         </div>
-                        <hr/>
-                        <div class="alert alert-danger" role="alert">
-                            Are you sure to delete this user?
-                        </div>
-                        <%--@elvariable id="userdelete" type=""--%>
-                        <form:form method="post" action="/admin/user/delete" modelAttribute="userdelete">
-                            <div class="form-group mb-3" style="display: none">
-                                <label class="form-label">ID</label>
-                                <form:input value="${userId}" path="id" type="text" class="form-control"/>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="card" style="width: 60%;">
+                                <div class="card-header">
+                                    User Information
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">ID: ${userDetail.id}</li>
+                                    <li class="list-group-item">Email: ${userDetail.email}</li>
+                                    <li class="list-group-item">Full Name: ${userDetail.fullname}</li>
+                                    <li class="list-group-item">Phone: ${userDetail.phone}</li>
+                                    <li class="list-group-item">Address: ${userDetail.address}</li>
+                                </ul>
                             </div>
-                            <button class="btn btn-danger">DELETE</button>
-                        </form:form>
+                        </div>
+                        <div class="mt-3 d-flex justify-content-center">
+                            <a href="/admin/user" class="btn btn-success">Back</a>
+                        </div>
+
 
                     </div>
                 </div>
