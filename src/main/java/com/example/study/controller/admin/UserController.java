@@ -1,19 +1,16 @@
 package com.example.study.controller.admin;
 
 import com.example.study.domain.User;
-import com.example.study.repository.UserRepository;
 import com.example.study.service.UploadService;
 import com.example.study.service.UserService;
-import jakarta.servlet.ServletContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
 import java.util.List;
 
 @Controller
@@ -21,10 +18,12 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService,  PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
     // injection
     // hàm tạo của controller, spring sẽ tự động thêm đối tượng service mà không cần tạo thủ công bằng new
@@ -46,7 +45,11 @@ public class UserController {
     public String createAdminUser(Model model, @ModelAttribute("newUser")  User user,
                                   @RequestParam("avatarFile") MultipartFile avatarFile) {
         String avatarName = this.uploadService.handleSaveUploadFile(avatarFile,"avatar");
-//        this.userService.handleSaveUser(user);
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+        user.setAvatar(avatarName);
+        user.setPassword(hashPassword);
+        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
+        this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
 
