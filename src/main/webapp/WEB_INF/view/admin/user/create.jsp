@@ -75,8 +75,8 @@
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="role" class="form-label">Role</label>
                                     <form:select class="form-select" path="role.name">
-                                        <form:option value="1">Admin</form:option>
-                                        <form:option value="2">User</form:option>
+                                        <form:option value="ADMIN">Admin</form:option>
+                                        <form:option value="USER">User</form:option>
                                     </form:select>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">

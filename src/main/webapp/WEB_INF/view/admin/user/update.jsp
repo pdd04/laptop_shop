@@ -39,7 +39,7 @@
                             <h1>User Update</h1>
                             <hr>
                             <%--@elvariable id="newUser" type=""--%>
-                            <form:form method="POST" action="/admin/user/update" modelAttribute= "newUser">
+                            <form:form method="POST" action="/admin/user/update" modelAttribute= "newUser" enctype="multipart/form-data">
                                 <div class="form-group mb-3" style="display: none">
                                     <label class="form-label">ID</label>
                                     <form:input path="id" type="text" class="form-control"/>
@@ -60,6 +60,18 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Address</label>
                                     <form:input path="address" type="text" class="form-control"/>
+                                </div>
+                                <div class="form-group mb-3 col-12 col-md-6">
+                                    <label for="role" class="form-label">Role</label>
+                                    <form:select class="form-select" path="role.name">
+                                        <form:option value="ADMIN">Admin</form:option>
+                                        <form:option value="USER">User</form:option>
+                                    </form:select>
+                                </div>
+                                <div class="form-group mb-3 col-12 col-md-6">
+                                    <label for="avatarFileUpdate" class="form-label">Avatar</label>
+                                    <input class="form-control" type="file" id="avatarFileUpdate"
+                                           accept=".pnf, .jpg, .jpeg" name="avatarFileUpdate"/>
                                 </div>
                                 <button type="submit" class="btn btn-warning mb-3">Update</button>
                             </form:form>
