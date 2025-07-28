@@ -22,12 +22,44 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
+                <h1 class="mt-4">Manager Product</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active">Products</li>
                 </ol>
-                <div>product</div>
+                <div class="mt-5">
+                    <div class="col-xl-12 mx-auto">
+                        <div class="d-flex justify-content-between">
+                            <h3>Table Product</h3>
+                            <a type="button" class="btn btn-success" href="/admin/product/create">Create Product</a>
+                        </div>
+                        <hr/>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Factory</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>example aaaaaaaaaaaaaaaaaaaaaa</td>
+                                <td>0.0</td>
+                                <td>example aaaaaaaaaaaaaaaaaaaaaa</td>
+                                <td>
+                                    <a type="button" class="btn btn-success" href="#">View</a>
+                                    <a type="button" class="btn btn-warning" href="#">Update</a>
+                                    <a type="button" class="btn btn-danger" href="#">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>

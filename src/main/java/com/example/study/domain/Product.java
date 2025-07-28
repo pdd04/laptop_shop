@@ -11,8 +11,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String Name;
-    private double Price;
+    private String name;
+    private double price;
     private String image;
     private String detailDesc;
     private String shortDesc;
@@ -33,19 +33,19 @@ public class Product {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        name = name;
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(double price) {
-        Price = price;
+        price = price;
     }
 
     public String getImage() {
