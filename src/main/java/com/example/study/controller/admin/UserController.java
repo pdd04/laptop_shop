@@ -3,12 +3,15 @@ package com.example.study.controller.admin;
 import com.example.study.domain.User;
 import com.example.study.service.UploadService;
 import com.example.study.service.UserService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 
 import java.util.List;
@@ -42,8 +45,17 @@ public class UserController {
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String createAdminUser(Model model, @ModelAttribute("newUser")  User user,
-                                  @RequestParam("avatarFile") MultipartFile avatarFile) {
+    public String createAdminUser(Model model,
+                                  @ModelAttribute("newUser")@Valid User user,
+                                  BindingResult bindingResult,
+                                  @RequestParam("avatarFile") MultipartFile avatarFile
+                                  ) {
+        //validate
+        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+        for(FieldError fieldError : fieldErrors){
+            System.out.println(">>>>" + fieldError.getObjectName() + "-" +  fieldError.getDefaultMessage());
+        }
+
         String avatarName = this.uploadService.handleSaveUploadFile(avatarFile,"avatar");
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
         user.setAvatar(avatarName);
