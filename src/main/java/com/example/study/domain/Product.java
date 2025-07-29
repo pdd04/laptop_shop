@@ -2,6 +2,8 @@ package com.example.study.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -11,11 +13,23 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Size(min = 3, message = "tên phải có độ dài tối thiểu 3 ký tự")
     private String name;
+
+    @NotNull(message = "Chưa điền giá")
     private double price;
+
+    @NotNull(message = "Chưa tải ảnh")
     private String image;
+
+    @NotNull(message = "Chưa có mô tả sản phẩm")
+    @Size(min = 10, message = "Mô tả phải có độ dài trên 10 ký tự")
     private String detailDesc;
     private String shortDesc;
+
+    @NotNull(message = "Chưa điền số lượng sản phẩm")
     private long quantity;
     private long sold;
     private String factory;
@@ -37,7 +51,7 @@ public class Product {
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 
     public double getPrice() {
@@ -45,7 +59,7 @@ public class Product {
     }
 
     public void setPrice(double price) {
-        price = price;
+        this.price = price;
     }
 
     public String getImage() {

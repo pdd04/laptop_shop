@@ -51,32 +51,51 @@
                             <form:form class="row" method="post" action="/admin/product/create" enctype="multipart/form-data"
                             modelAttribute="newProduct">
                                 <div class="form-group mb-3 col-12 col-md-6">
+                                    <c:set var="errorName">
+                                        <form:errors path="name" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Name</label>
-                                    <form:input path="name" type="email" class="form-control"/>
+                                    <form:input path="name" type="text" class="form-control ${not empty errorName ? 'is-invalid' : ''}"/>
+                                    ${errorName}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
+                                    <c:set var="errorPrice">
+                                        <form:errors path="price" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Price</label>
-                                    <form:input path="price" type="number" class="form-control"/>
+                                    <form:input path="price" type="number"
+                                                class="form-control ${not empty errorPrice ? 'is-invalid' : ''}" step="0.01"/>
+                                    ${errorPrice}
                                 </div>
                                 <div class="form-group mb-3">
+                                    <c:set var="errorDetailDesc">
+                                        <form:errors path="detailDesc" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Detail description</label>
-                                    <textarea path="detailDesc" class="form-control" rows="3"></textarea>
+                                    <form:textarea path="detailDesc"
+                                                   class="form-control ${not empty errorDetailDesc ? 'is-invalid' : ''}" rows="3"></form:textarea>
+                                    ${errorDetailDesc}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label class="form-label">Short description</label>
                                     <form:input path="shortDesc" type="text" class="form-control"/>
                                 </div>
                                 <div class="form-group mb-3">
+                                    <c:set var="errorQuantity">
+                                        <form:errors path="quantity" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Quantity</label>
-                                    <form:input path="quantity" type="number" class="form-control"/>
+                                    <form:input path="quantity" type="number"
+                                                class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}"/>
+                                    ${errorQuantity}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="factory" class="form-label">Factory</label>
-                                    <select class="form-select" path="factory">
-                                        <option value="Apple">Apple</option>
-                                        <option value="Samsung">Samsung</option>
-                                        <option value="Acer">Acer</option>
-                                    </select>
+                                    <form:select class="form-select" path="factory">
+                                        <form:option value="Apple">Apple</form:option>
+                                        <form:option value="Samsung">Samsung</form:option>
+                                        <form:option value="Acer">Acer</form:option>
+                                    </form:select>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="target" class="form-label">Target</label>
@@ -86,9 +105,14 @@
                                     </form:select>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
+                                    <c:set var="errorImage">
+                                        <form:errors path="image" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label for="imageFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="imageFile"
-                                           accept=".pnf, .jpg, .jpeg" name="imageFile" />
+                                    <input class="form-control
+                                                    ${not empty errorImage ? 'is-invalid' : ''}" type="file" id="imageFile"
+                                                    accept=".pnf, .jpg, .jpeg" name="imageFile" />
+                                    ${errorImage}
                                 </div>
                                 <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="image preview" id="imagePreview">
