@@ -47,13 +47,18 @@ public class UserController {
     @PostMapping(value = "/admin/user/create")
     public String createAdminUser(Model model,
                                   @ModelAttribute("newUser")@Valid User user,
-                                  BindingResult bindingResult,
+                                  BindingResult newUserBindingResult,
                                   @RequestParam("avatarFile") MultipartFile avatarFile
                                   ) {
-        //validate
-        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+
+        List<FieldError> fieldErrors = newUserBindingResult.getFieldErrors();
         for(FieldError fieldError : fieldErrors){
-            System.out.println(">>>>" + fieldError.getObjectName() + "-" +  fieldError.getDefaultMessage());
+            System.out.println(">>>>" + fieldError.getField() + "-" +  fieldError.getDefaultMessage());
+        }
+
+        //validate
+        if(newUserBindingResult.hasErrors()){
+            return "admin/user/create";
         }
 
         String avatarName = this.uploadService.handleSaveUploadFile(avatarFile,"avatar");

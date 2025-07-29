@@ -16,15 +16,15 @@ public class User {
     private long id;
 
     @NotNull
-    @Email
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
     @NotNull
-    @Min(3)
+    @Size(min = 3, message = "Tên phải có ít nhất 3 ký tự")
     private String fullname;
 
     @NotNull
-    @Min(3)
+    @Size(min = 3, message = "Mật khẩu phải có ít nhất 3 ký tự")
     private String password;
     private String address;
 

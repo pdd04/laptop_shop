@@ -4,6 +4,7 @@
 <%--dua thu vien core cua jstl vao jsp--%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,21 +53,36 @@
                             <form:form method="POST" action="/admin/user/create" modelAttribute= "newUser" class="row"
                             enctype="multipart/form-data">
                                 <div class="form-group mb-3 col-12 col-md-6">
+                                    <c:set var="errorEmail">
+                                        <form:errors path="email" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Email address</label>
-                                    <form:input path="email" type="email" class="form-control"/>
+                                    <form:input path="email" type="email"
+                                                class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"/>
                                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    ${errorEmail}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
+                                    <c:set var="errorPassword">
+                                        <form:errors path="password" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Password</label>
-                                    <form:input path="password" type="password" class="form-control"/>
+                                    <form:input path="password" type="password"
+                                                class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"/>
+                                    ${errorPassword}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label class="form-label">Phone</label>
                                     <form:input path="phone" type="number" class="form-control"/>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
+                                    <c:set var="errorName">
+                                        <form:errors path="fullname" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <label class="form-label">Full name</label>
-                                    <form:input path="fullname" type="text" class="form-control"/>
+                                    <form:input path="fullname" type="text"
+                                                class="form-control ${not empty errorName ? 'is-invalid' : ''}"/>
+                                    ${errorName}
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="form-label">Address</label>
