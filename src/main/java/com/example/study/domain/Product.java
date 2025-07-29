@@ -2,6 +2,7 @@ package com.example.study.domain;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -19,6 +20,7 @@ public class Product {
     private String name;
 
     @NotNull(message = "Chưa điền giá")
+    @DecimalMin(value = "0", inclusive = false, message = "giá phải lớn hơn 0")
     private double price;
 
     @NotNull(message = "Chưa tải ảnh")

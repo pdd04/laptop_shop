@@ -2,7 +2,7 @@
 <%--set type cua page la html--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%--dua thu vien core cua jstl vao jsp--%>
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,17 +45,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>example aaaaaaaaaaaaaaaaaaaaaa</td>
-                                <td>0.0</td>
-                                <td>example aaaaaaaaaaaaaaaaaaaaaa</td>
-                                <td>
-                                    <a type="button" class="btn btn-success" href="#">View</a>
-                                    <a type="button" class="btn btn-warning" href="#">Update</a>
-                                    <a type="button" class="btn btn-danger" href="#">Delete</a>
-                                </td>
-                            </tr>
+                            <c:forEach var="product" items="${products}">
+                                <tr>
+                                    <th scope="row">${product.id}</th>
+                                    <td>${product.name}</td>
+                                    <td>${product.price}</td>
+                                    <td>${product.factory}</td>
+                                    <td>
+                                        <a type="button" class="btn btn-success" href="#">View</a>
+                                        <a type="button" class="btn btn-warning" href="#">Update</a>
+                                        <a type="button" class="btn btn-danger" href="#">Delete</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>

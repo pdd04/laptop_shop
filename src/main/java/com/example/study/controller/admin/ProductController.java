@@ -28,9 +28,10 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProduct() {
+    public String getProduct(Model model) {
+        List<Product> arrProducts = this.productService.findAll();
+        model.addAttribute("products", arrProducts);
         return "admin/product/show";
-
     }
 
     @GetMapping("/admin/product/create")
