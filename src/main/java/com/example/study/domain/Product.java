@@ -26,6 +26,7 @@ public class Product {
 
     @NotNull(message = "Chưa có mô tả sản phẩm")
     @Size(min = 10, message = "Mô tả phải có độ dài trên 10 ký tự")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
     private String shortDesc;
 

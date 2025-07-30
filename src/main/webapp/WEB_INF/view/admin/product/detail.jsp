@@ -18,7 +18,16 @@
     <title>User Detail - SB Admin</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
+    <script>
+        $(document).ready(() => {
+            const orgImage = "${productDetail.image}";
+            if (orgImage) {
+                const urlImage = "/images/product/" + orgImage;
+                $("#imagePreview").attr("src", urlImage);
+                $("#imagePreview").css({ "display": "block" });
+            }
+        });
+    </script>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"/>
@@ -53,6 +62,7 @@
                                     <li class="list-group-item">Sold: ${productDetail.sold}</li>
                                     <li class="list-group-item">Factory: ${productDetail.factory}</li>
                                     <li class="list-group-item">Target: ${productDetail.target}</li>
+                                    <li class="list-group-item"><img style="max-height: 250px; display: none;" alt="image preview" id="imagePreview"></li>
                                 </ul>
                             </div>
                         </div>

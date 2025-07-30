@@ -92,22 +92,26 @@
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="factory" class="form-label">Factory</label>
                                     <form:select class="form-select" path="factory">
-                                        <form:option value="Apple">Apple</form:option>
-                                        <form:option value="Samsung">Samsung</form:option>
-                                        <form:option value="Acer">Acer</form:option>
+                                        <form:option value="Dell">Dell</form:option>
+                                        <form:option value="HP">HP</form:option>
+                                        <form:option value="MSI">MSI</form:option>
+                                        <form:option value="ASUS">ASUS</form:option>
+                                        <form:option value="Lenovo">Lenovo</form:option>
                                     </form:select>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="target" class="form-label">Target</label>
                                     <form:select class="form-select" path="target">
+                                        <form:option value="Văn phòng">Văn phòng</form:option>
                                         <form:option value="Gaming">Gaming</form:option>
-                                        <form:option value="IT">IT</form:option>
+                                        <form:option value="Thiết kế đồ họa">Thiết kế đồ họa</form:option>
+                                        <form:option value="Học tập">Học tập</form:option>
                                     </form:select>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="imageFile" class="form-label">Image</label>
                                     <input class="form-control" type="file" id="imageFile"
-                                                    accept=".pnf, .jpg, .jpeg" name="imageFile" />
+                                                    accept=".pnf, .jpg, .jpeg .webp" name="imageFile" />
                                 </div>
                                 <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="image preview" id="imagePreview">
