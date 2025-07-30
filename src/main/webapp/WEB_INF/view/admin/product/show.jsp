@@ -52,9 +52,9 @@
                                     <td>${product.price}</td>
                                     <td>${product.factory}</td>
                                     <td>
-                                        <a type="button" class="btn btn-success" href="#">View</a>
-                                        <a type="button" class="btn btn-warning" href="#">Update</a>
-                                        <a type="button" class="btn btn-danger" href="#">Delete</a>
+                                        <a type="button" class="btn btn-success" href="/admin/product/${product.id}">View</a>
+                                        <a type="button" class="btn btn-warning" href="/admin/product/update/${product.id}">Update</a>
+                                        <a type="button" class="btn btn-danger" href="/admin/product/delete/${product.id}">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>

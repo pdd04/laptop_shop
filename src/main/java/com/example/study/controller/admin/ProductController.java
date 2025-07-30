@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -41,15 +38,9 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String createProduct(Model model, @ModelAttribute("newProduct")@Valid Product product,
-                                BindingResult newProductBindingResult,
+    public String createProduct(@ModelAttribute("newProduct")@Valid Product product,
+                                    BindingResult newProductBindingResult,
                                 @RequestParam("imageFile") MultipartFile imageFile) {
-
-        List<FieldError> fieldErrors = newProductBindingResult.getFieldErrors();
-        for(FieldError fieldError : fieldErrors){
-            System.out.println(">>>>" + fieldError.getField() + "-" +  fieldError.getDefaultMessage());
-        }
-
         //validate
         if(newProductBindingResult.hasErrors()){
             return "admin/product/create";
@@ -60,4 +51,60 @@ public class ProductController {
         this.productService.handelSaveProduct(product);
         return "redirect:/admin/product";
     }
+
+    @GetMapping("/admin/product/{productId}")
+    public  String getProductDetailPage(Model model, @PathVariable long productId) {
+        Product productDetail = this.productService.findById(productId);
+        model.addAttribute("productDetail", productDetail);
+        return "admin/product/detail";
+    }
+
+    @GetMapping("/admin/product/delete/{productId}")
+    public String getDeleteProductPage(Model model, @PathVariable long productId) {
+        model.addAttribute("deleteProduct",new Product());
+        model.addAttribute("productId",productId);
+        return "admin/product/delete";
+    }
+
+    @PostMapping("/admin/product/delete")
+    public String deleteProduct(Model model, @ModelAttribute("deleteProduct") Product deleteProduct) {
+        this.productService.deleteById(deleteProduct.getId());
+        return "redirect:/admin/product";
+    }
+
+    @GetMapping("/admin/product/update/{productId}")
+    public String getUpdateProductPage(Model model, @PathVariable long productId) {
+        Product productDetail = this.productService.findById(productId);
+        model.addAttribute("productDetail", productDetail);
+        return "admin/product/update";
+    }
+
+    @PostMapping("/admin/product/update")
+    public String updateProduct(Model model, @ModelAttribute("productDetail")@Valid Product product,
+                                BindingResult newProductBindingResult,
+                                @RequestParam("imageFileUpdate") MultipartFile imageFile) {
+
+        //validate
+        if(newProductBindingResult.hasErrors()){
+            return "admin/product/update";
+        }
+        Product newProduct = this.productService.findById(product.getId());
+        if(newProduct != null){
+            if(!imageFile.isEmpty()){
+                String imageName = this.uploadService.handleSaveUploadFile(imageFile,"product");
+                newProduct.setImage(imageName);
+            }
+            newProduct.setName(product.getName());
+            newProduct.setPrice(product.getPrice());
+            newProduct.setDetailDesc(product.getDetailDesc());
+            newProduct.setShortDesc(product.getShortDesc());
+            newProduct.setPrice(product.getPrice());
+            newProduct.setQuantity(product.getQuantity());
+            newProduct.setTarget(product.getTarget());
+            newProduct.setFactory(product.getFactory());
+            this.productService.handelSaveProduct(newProduct);
+        }
+        return "redirect:/admin/product";
+    }
+
 }

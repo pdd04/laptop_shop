@@ -22,8 +22,6 @@ public class Product {
     @NotNull(message = "Chưa điền giá")
     @DecimalMin(value = "0", inclusive = false, message = "giá phải lớn hơn 0")
     private double price;
-
-    @NotNull(message = "Chưa tải ảnh")
     private String image;
 
     @NotNull(message = "Chưa có mô tả sản phẩm")

@@ -19,15 +19,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(() => {
-            const imageFile = $("#imageFile");
-            imageFile.change(function (e) {
+            const avatarFile = $("#imageFileUpdate");
+            const orgImage = "${productDetail.image}";
+            if (orgImage) {
+                const urlImage = "/images/product/" + orgImage;
+                $("#imagePreview").attr("src", urlImage);
+                $("#imagePreview").css({ "display": "block" });
+            }
+
+            avatarFile.change(function (e) {
                 const imgURL = URL.createObjectURL(e.target.files[0]);
                 $("#imagePreview").attr("src", imgURL);
                 $("#imagePreview").css({ "display": "block" });
             });
         });
-    </script>
 
+    </script>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"/>
@@ -36,27 +43,31 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Create User</h1>
+                <h1 class="mt-4">Update User</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active"><a href="/admin/product">Product</a></li>
-                    <li class="breadcrumb-item active">Create product</li>
+                    <li class="breadcrumb-item active">Update product</li>
                 </ol>
                 <div class="mt-5">
                     <div class="row">
                         <div class="col-md-6 col-12 mx-auto">
-                            <h1>Create a product</h1>
+                            <h1>Update a product</h1>
                             <hr>
-                            <%--@elvariable id="newProduct" type=""--%>
-                            <form:form class="row" method="POST" action="/admin/product/create" enctype="multipart/form-data"
-                            modelAttribute="newProduct">
+                            <%--@elvariable id="productDetail" type=""--%>
+                            <form:form class="row" method="POST" action="/admin/product/update" enctype="multipart/form-data"
+                                       modelAttribute="productDetail">
+                                <div class="form-group mb-3 col-12 col-md-6" style="display: none;">
+                                    <label class="form-label">Id</label>
+                                    <form:input path="id" type="text" class="form-control"/>
+                                </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <c:set var="errorName">
                                         <form:errors path="name" cssClass="invalid-feedback"/>
                                     </c:set>
                                     <label class="form-label">Name</label>
                                     <form:input path="name" type="text" class="form-control ${not empty errorName ? 'is-invalid' : ''}"/>
-                                    ${errorName}
+                                        ${errorName}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <c:set var="errorPrice">
@@ -65,7 +76,7 @@
                                     <label class="form-label">Price</label>
                                     <form:input path="price" type="number"
                                                 class="form-control ${not empty errorPrice ? 'is-invalid' : ''}" step="0.01"/>
-                                    ${errorPrice}
+                                        ${errorPrice}
                                 </div>
                                 <div class="form-group mb-3">
                                     <c:set var="errorDetailDesc">
@@ -74,7 +85,7 @@
                                     <label class="form-label">Detail description</label>
                                     <form:textarea path="detailDesc"
                                                    class="form-control ${not empty errorDetailDesc ? 'is-invalid' : ''}" rows="3"></form:textarea>
-                                    ${errorDetailDesc}
+                                        ${errorDetailDesc}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label class="form-label">Short description</label>
@@ -87,7 +98,7 @@
                                     <label class="form-label">Quantity</label>
                                     <form:input path="quantity" type="number"
                                                 class="form-control ${not empty errorQuantity ? 'is-invalid' : ''}"/>
-                                    ${errorQuantity}
+                                        ${errorQuantity}
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
                                     <label for="factory" class="form-label">Factory</label>
@@ -105,9 +116,9 @@
                                     </form:select>
                                 </div>
                                 <div class="form-group mb-3 col-12 col-md-6">
-                                    <label for="imageFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="imageFile"
-                                                    accept=".pnf, .jpg, .jpeg" name="imageFile" />
+                                    <label for="imageFileUpdate" class="form-label">Image</label>
+                                    <input class="form-control" type="file" id="imageFileUpdate"
+                                           accept=".pnf, .jpg, .jpeg" name="imageFileUpdate" />
                                 </div>
                                 <div class="col-12 mb-3">
                                     <img style="max-height: 250px; display: none;" alt="image preview" id="imagePreview">
