@@ -51,10 +51,10 @@ public class UserController {
                                   @RequestParam("avatarFile") MultipartFile avatarFile
                                   ) {
 
-        List<FieldError> fieldErrors = newUserBindingResult.getFieldErrors();
-        for(FieldError fieldError : fieldErrors){
-            System.out.println(">>>>" + fieldError.getField() + "-" +  fieldError.getDefaultMessage());
-        }
+//        List<FieldError> fieldErrors = newUserBindingResult.getFieldErrors();
+//        for(FieldError fieldError : fieldErrors){
+//            System.out.println(">>>>" + fieldError.getField() + "-" +  fieldError.getDefaultMessage());
+//        }
 
         //validate
         if(newUserBindingResult.hasErrors()){

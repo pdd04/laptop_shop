@@ -2,6 +2,7 @@ package com.example.study.service;
 
 import com.example.study.domain.Role;
 import com.example.study.domain.User;
+import com.example.study.domain.dto.RegisterDTO;
 import com.example.study.repository.RoleRepository;
 import com.example.study.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,17 @@ public class UserService {
 
     public Role getRoleByName(String name){
         return this.roleRepository.findByName(name);
+    }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO){
+        User user = new User();
+        user.setFullname(registerDTO.getFirstName()+""+registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
+
+    public boolean checkEmailExists(String email){
+        return this.userRepository.existsByEmail(email);
     }
 }
