@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -27,6 +27,9 @@
                             <div class="card-body">
                                 <%--@elvariable id="registerUser" type=""--%>
                                 <form:form method="post" action="/register" modelAttribute="registerUser">
+                                    <c:set var="errorName">
+                                        <form:errors path="firstName" cssClass="invalid-feedback"/>
+                                    </c:set>
                                     <c:set var="errorPassword">
                                         <form:errors path="password" cssClass="invalid-feedback"/>
                                     </c:set>
@@ -39,9 +42,10 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <form:input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name"
+                                                <form:input class="form-control ${not empty errorName ? 'is-invalid' : ''}" id="inputFirstName" type="text" placeholder="Enter your first name"
                                                 path="firstName"/>
                                                 <label for="inputFirstName">First name</label>
+                                                ${errorName}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -78,7 +82,7 @@
                                     </div>
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn btn-success">Create Account</button>
+                                            <button type="submit" class="btn btn-primary">Create Account</button>
                                         </div>
                                     </div>
                                 </form:form>

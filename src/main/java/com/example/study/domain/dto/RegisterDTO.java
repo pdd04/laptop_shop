@@ -2,11 +2,17 @@ package com.example.study.domain.dto;
 
 
 import com.example.study.service.validator.RegisterChecked;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 @RegisterChecked
 public class RegisterDTO {
+
+    @Size(min = 3, message = "Tên phải có ít nhất 3 ký tự")
     private String firstName;
     private String lastName;
+
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
     private String password;
     private String confirmPassword;

@@ -34,20 +34,20 @@ public class HomePageController {
     public String getHomePage(Model model) {
         List<Product> products = this.productService.findAll();
         model.addAttribute("products", products);
-        return "/client/homepage/show";
+        return "client/homepage/show";
     }
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerUser", new RegisterDTO());
-        return "/client/auth/register";
+        return "client/auth/register";
     }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("registerUser")@Valid RegisterDTO registerUser,
                                BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            return "/client/auth/register";
+            return "client/auth/register";
         }
         User user = this.userService.registerDTOtoUser(registerUser);
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
@@ -59,6 +59,6 @@ public class HomePageController {
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        return "/client/auth/login";
+        return "client/auth/login";
     }
 }

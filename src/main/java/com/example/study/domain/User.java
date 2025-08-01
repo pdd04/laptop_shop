@@ -25,7 +25,8 @@ public class User {
     private String fullname;
 
     @NotNull
-    @StrongPassword(message = "Mật khẩu phải có tối thiểu 8 ký tự, 1 chữ số, 1 chữ in hoa, 1 chữ in thường và 1 ký tự đặc biệt")
+//    @StrongPassword(message = "Mật khẩu phải có tối thiểu 8 ký tự, 1 chữ số, 1 chữ in hoa, 1 chữ in thường và 1 ký tự đặc biệt")
+    @Size(min = 3, message = "mat khau phai co toi thieu 3 ky tu")
     private String password;
     private String address;
 
