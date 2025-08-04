@@ -59,7 +59,8 @@ public class SecurityConfiguration {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
-                        .permitAll());
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access_denied"));
         return http.build();
     }
 
