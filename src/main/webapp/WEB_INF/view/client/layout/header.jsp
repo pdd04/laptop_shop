@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page session="true" %>
 <!-- Navbar start -->
 <div class="container-fluid fixed-top">
     <div class="container px-0">
@@ -28,9 +29,9 @@
                         <ul class="dropdown-menu dropdown-menu-end p-4" aria-labelledby="dropdownMenuLink">
                             <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
                                 <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
-                                     src="/images/product/1753889157663-Dell Vostro 3530 i5‑1334U.webp" />
+                                     src="/images/avatar/${sessionScope.avatar}" />
                                 <div class="text-center my-3">
-                                    <c:out value="${pageContext.request.userPrincipal.name}" />
+                                    <c:out value="${sessionScope.fullname}"/>
                                 </div>
                             </li>
                             <li><a class="dropdown-item" href="#">Quản lý tài khoản</a></li>

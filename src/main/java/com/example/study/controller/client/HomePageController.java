@@ -5,6 +5,8 @@ import com.example.study.domain.User;
 import com.example.study.domain.dto.RegisterDTO;
 import com.example.study.service.ProductService;
 import com.example.study.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
