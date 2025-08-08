@@ -36,6 +36,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         if (user != null) {
             session.setAttribute("fullname", user.getFullname());
             session.setAttribute("avatar", user.getAvatar());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("id", user.getId());
         }
 
         redirectStrategy.sendRedirect(request, response, "/");
