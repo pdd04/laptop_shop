@@ -2,7 +2,9 @@
 <%--set type cua page la html--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%--dua thu vien core cua jstl vao jsp--%>
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%--thư viện để format giá tiền--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +29,42 @@
                     <li class="breadcrumb-item active"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active">Orders</li>
                 </ol>
-                <div>order</div>
+                <div class="mt-5">
+                    <div class="col-xl-12 mx-auto">
+                        <div class="d-flex justify-content-between">
+                            <h3>Table Orders</h3>
+                        </div>
+                        <hr/>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="row">
+                                <th scope="col" class="col">Id</th>
+                                <th scope="col" class="col">Total Price</th>
+                                <th scope="col" class="col">User</th>
+                                <th scope="col" class="col">Status</th>
+                                <th scope="col" class="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="order" items="${orders}">
+                                <tr class="row">
+                                    <th scope="row" class="col">${order.id}</th>
+                                    <td class="col">
+                                        <fmt:formatNumber type="number" value="${order.totalPrice}"/> đ
+                                    </td>
+                                    <td class="col">${order.user.fullname}</td>
+                                    <td class="col">${order.status}</td>
+                                    <td class="col">
+                                        <a type="button" class="btn btn-success" href="/admin/order/${order.id}">View</a>
+                                        <a type="button" class="btn btn-warning" href="/admin/order/update/${order.id}">Update</a>
+                                        <a type="button" class="btn btn-danger" href="/admin/order/delete/${order.id}">Delete</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>
