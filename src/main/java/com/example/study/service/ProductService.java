@@ -149,4 +149,8 @@ public class ProductService {
 //        trước đó ở hàm này có thực hiện xóa cart ở cuối nhưng bị lỗi 500 dù đã có fix nhưng
 //        vẫn không thành công.
     }
+
+    public long countProducts(){
+        return this.productRepository.count();
+    }
 }

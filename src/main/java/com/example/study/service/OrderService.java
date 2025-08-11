@@ -44,4 +44,7 @@ public class OrderService {
         orderRepository.deleteById(order.getId());
     }
 
+    public long countOrders() {
+        return this.orderRepository.count();
+    }
 }
