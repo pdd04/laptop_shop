@@ -1,9 +1,7 @@
 package com.example.study.controller.client;
 
-import com.example.study.domain.Cart;
-import com.example.study.domain.CartDetail;
-import com.example.study.domain.Product;
-import com.example.study.domain.User;
+import com.example.study.domain.*;
+import com.example.study.service.OrderService;
 import com.example.study.service.ProductService;
 import com.example.study.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,11 +17,14 @@ public class ItemController {
 
     private final ProductService productService;
     private final UserService userService;
+    private final OrderService orderService;
 
     public ItemController(ProductService productService,
-                          UserService userService) {
+                          UserService userService,
+                          OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/product/{id}")
@@ -37,7 +38,7 @@ public class ItemController {
     public String addToCart(@PathVariable long id, HttpServletRequest request){
         HttpSession session = request.getSession(false);
         String email = (String) session.getAttribute("email");
-        this.productService.handleAddProductToCart(email,id, session);
+        this.productService.handleAddProductToCart(email,id, session, 1);
         return "redirect:/";
     }
 
@@ -87,5 +88,23 @@ public class ItemController {
     @GetMapping("/thanks")
     public String getThanksPage(){
         return "client/cart/thanks";
+    }
+
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        List<Order> orders = this.orderService.getOrderHistory(session);
+        model.addAttribute("orders", orders);
+        return "client/history/show";
+    }
+
+    @PostMapping("/add-product-from-view-detail")
+    public String addFromViewDetail(@RequestParam("id") long id,
+                                    @RequestParam("quantity") long quantity,
+                                    HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        String email = (String) session.getAttribute("email");
+        this.productService.handleAddProductToCart(email,id, session, quantity);
+        return "redirect:/";
     }
 }
