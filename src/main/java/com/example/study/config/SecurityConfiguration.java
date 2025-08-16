@@ -62,7 +62,7 @@ public class SecurityConfiguration {
                         .permitAll()
 
                         .requestMatchers("/","login",
-                                "/product/**","/client/**","/css/**","/js/**","/images/**")
+                                "/product/**","/client/**","/css/**","/js/**","/images/**", "/register")
                         .permitAll()// cho phep nguoi dung truy cap vao cac duong link tren ma khong can login
 
                         .requestMatchers("/admin/**").hasRole("ADMIN")

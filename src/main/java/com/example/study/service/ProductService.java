@@ -4,6 +4,8 @@ import com.example.study.domain.*;
 import com.example.study.repository.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +39,9 @@ public class ProductService {
 
     public List<Product> findAll() {
         return this.productRepository.findAll();
+    }
+    public Page<Product> findAll(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 
     public Product findById(long id) {

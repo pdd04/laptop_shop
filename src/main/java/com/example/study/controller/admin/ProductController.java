@@ -4,6 +4,9 @@ import com.example.study.domain.Product;
 import com.example.study.service.ProductService;
 import com.example.study.service.UploadService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,9 +28,14 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProduct(Model model) {
-        List<Product> arrProducts = this.productService.findAll();
-        model.addAttribute("products", arrProducts);
+    public String getProduct(Model model,
+                             @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page - 1, 2);
+        Page<Product> arrProducts = this.productService.findAll(pageable);
+        List<Product> products = arrProducts.getContent(); // convert arr tu Page thanh List
+        model.addAttribute("products", products);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", arrProducts.getTotalPages());
         return "admin/product/show";
     }
 
