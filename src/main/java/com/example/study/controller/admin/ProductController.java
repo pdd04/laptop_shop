@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -29,7 +30,15 @@ public class ProductController {
 
     @GetMapping("/admin/product")
     public String getProduct(Model model,
-                             @RequestParam("page") int page) {
+                             @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try{
+            if(pageOptional.isPresent()){
+                page = Integer.parseInt(pageOptional.get());
+            }
+        }catch(Exception ex){
+
+        }
         Pageable pageable = PageRequest.of(page - 1, 2);
         Page<Product> arrProducts = this.productService.findAll(pageable);
         List<Product> products = arrProducts.getContent(); // convert arr tu Page thanh List

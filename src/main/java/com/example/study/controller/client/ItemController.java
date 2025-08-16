@@ -6,11 +6,15 @@ import com.example.study.service.ProductService;
 import com.example.study.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ItemController {
@@ -106,5 +110,23 @@ public class ItemController {
         String email = (String) session.getAttribute("email");
         this.productService.handleAddProductToCart(email,id, session, quantity);
         return "redirect:/";
+    }
+
+    @GetMapping("/products")
+    public String getProductsPage(Model model,
+                                  @RequestParam("page") Optional<String> pageOptional){
+        int page = 1;
+        try{
+            page = Integer.parseInt(pageOptional.get());
+        }catch(Exception e){
+
+        }
+        Pageable pageable = PageRequest.of(page - 1, 3);
+        Page<Product> products = this.productService.findAll(pageable);
+        List<Product> productList = products.getContent();
+        model.addAttribute("products", productList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", products.getTotalPages());
+        return "client/product/show";
     }
 }
