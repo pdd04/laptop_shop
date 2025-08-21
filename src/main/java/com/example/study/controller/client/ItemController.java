@@ -1,6 +1,7 @@
 package com.example.study.controller.client;
 
 import com.example.study.domain.*;
+import com.example.study.domain.dto.ProductCriteriaDTO;
 import com.example.study.service.OrderService;
 import com.example.study.service.ProductService;
 import com.example.study.service.UserService;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -113,17 +116,21 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductsPage(Model model,
-                                  @RequestParam("page") Optional<String> pageOptional){
+    public String getProductsPage(Model model, ProductCriteriaDTO productCriteriaDTO){
         int page = 1;
         try{
-            page = Integer.parseInt(pageOptional.get());
+            page = Integer.parseInt(productCriteriaDTO.getPage().get());
         }catch(Exception e){
 
         }
-        Pageable pageable = PageRequest.of(page - 1, 3);
-        Page<Product> products = this.productService.findAll(pageable);
-        List<Product> productList = products.getContent();
+        Pageable pageable = PageRequest.of(page - 1, 60);
+
+        Page<Product> products = this.productService.findAll(pageable, productCriteriaDTO);
+
+
+
+        List<Product> productList = products.getContent().size() > 0 ? products.getContent() : new ArrayList<Product>();
+
         model.addAttribute("products", productList);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", products.getTotalPages());

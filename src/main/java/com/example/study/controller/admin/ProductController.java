@@ -40,6 +40,7 @@ public class ProductController {
 
         }
         Pageable pageable = PageRequest.of(page - 1, 2);
+
         Page<Product> arrProducts = this.productService.findAll(pageable);
         List<Product> products = arrProducts.getContent(); // convert arr tu Page thanh List
         model.addAttribute("products", products);

@@ -1,11 +1,13 @@
 package com.example.study.service;
 
 import com.example.study.domain.*;
+import com.example.study.domain.dto.ProductCriteriaDTO;
 import com.example.study.repository.*;
+import com.example.study.service.specification.ProductSpecs;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,8 +42,29 @@ public class ProductService {
     public List<Product> findAll() {
         return this.productRepository.findAll();
     }
+
     public Page<Product> findAll(Pageable pageable) {
         return this.productRepository.findAll(pageable);
+    }
+
+
+    public Page<Product> findAll(Pageable pageable, ProductCriteriaDTO productCriteriaDTO) {
+
+        if(productCriteriaDTO.getFactory() == null && productCriteriaDTO.getPrice() == null && productCriteriaDTO.getTarget() == null){
+            return this.productRepository.findAll(pageable);
+        }
+
+        Specification<Product> combinedSpec = ProductSpecs.emptySpec();
+        if(productCriteriaDTO.getTarget() != null && productCriteriaDTO.getTarget().isPresent()) {
+            Specification<Product> currentSpecs = ProductSpecs.listTargetLike(productCriteriaDTO.getTarget().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+        if(productCriteriaDTO.getFactory() != null && productCriteriaDTO.getFactory().isPresent()) {
+            Specification<Product> currentSpecs = ProductSpecs.listFactoryLike(productCriteriaDTO.getFactory().get());
+            combinedSpec = combinedSpec.and(currentSpecs);
+        }
+
+        return this.productRepository.findAll(combinedSpec,pageable);
     }
 
     public Product findById(long id) {

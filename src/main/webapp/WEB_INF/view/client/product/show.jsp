@@ -52,28 +52,83 @@
                     <div class="col-lg-4">
                         <div class="row g-4">
                             <div class="col-lg-12">
-                                <div class="mb-3">
+                                <div class="mb-3" id="factoryFilter">
                                     <div class="mb-2">
                                         <b>Hãng sản xuất</b>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="APPLE" id="factory-1">
+                                        <input class="form-check-input" type="checkbox" value="DELL" id="factory-1">
                                         <label class="form-check-label" for="factory-1">
-                                            APPLE
+                                            DELL
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="ASUS" id="factory-2" checked>
+                                        <input class="form-check-input" type="checkbox" value="ASUS" id="factory-2">
                                         <label class="form-check-label" for="factory-2">
                                             ASUS
                                         </label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="HP" id="factory-3">
+                                        <label class="form-check-label" for="factory-3">
+                                            HP
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="MSI" id="factory-4">
+                                        <label class="form-check-label" for="factory-4">
+                                            MSI
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="LENOVO" id="factory-5">
+                                        <label class="form-check-label" for="factory-5">
+                                            LENOVO
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3" id="targetFilter">
+                                    <div class="mb-2">
+                                        <b>Mục đích sử dụng</b>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Văn phòng" id="target-1">
+                                        <label class="form-check-label" for="target-1">
+                                            VĂN PHÒNG
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Gaming" id="factory-2">
+                                        <label class="form-check-label" for="factory-2">
+                                            GAMING
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Thiết kế đồ họa" id="target-3">
+                                        <label class="form-check-label" for="target-3">
+                                            THIẾT KẾ ĐỒ HỌA
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Học tập" id="target-4">
+                                        <label class="form-check-label" for="target-4">
+                                            HỌC TẬP
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <button class="btn border-secondary px-4 py-3 rounded-pill text-primary w-50" type="button" id="btnFilter">
+                                        Lọc sản phẩm
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="row g-4 justify-content-center">
+                            <c:if test="${totalPages == 0}" >
+                                <div>Không tìm thấy sản phẩm</div>
+                            </c:if>
                             <c:forEach var="product" items="${products}">
                             <div class="col-md-6 col-lg-6 col-xl-4">
                                 <div class="rounded position-relative fruite-item">
@@ -104,27 +159,29 @@
                             </div>
                             </c:forEach>
                             <div class="col-12">
+                                <c:if test="${totalPages > 0}" >
                                 <div class="pagination d-flex justify-content-center mt-5">
-                            <li class="page-item rounded" style="${currentPage eq 1 ? "display:none" : ""}">
-                                <a class="page-link" href="/products?page=${currentPage - 1}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
-                                <li class="page-item rounded" style="${totalPages eq 1 ? "display:none" : ""}">
-                                    <a class="page-link ${currentPage eq (loop.index + 1) ? "active" : ""}" href="/products?page=${loop.index + 1}">
-                                            ${loop.index + 1}
-                                    </a>
-                                </li>
-                            </c:forEach>
-                            <li class="page-item rounded" style="${currentPage eq totalPages ? "display:none" : ""}">
-                                <a class="page-link" href="/products?page=${currentPage + 1}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
+                                    <li class="page-item rounded" style="${currentPage eq 1 ? "display:none" : ""}">
+                                        <a class="page-link" href="/products?page=${currentPage - 1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                                        <li class="page-item rounded" style="${totalPages eq 1 ? "display:none" : ""}">
+                                            <a class="page-link ${currentPage eq (loop.index + 1) ? "active" : ""}" href="/products?page=${loop.index + 1}">
+                                                    ${loop.index + 1}
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                    <li class="page-item rounded" style="${currentPage eq totalPages ? "display:none" : ""}">
+                                        <a class="page-link" href="/products?page=${currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
                                 </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>
