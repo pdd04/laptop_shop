@@ -116,6 +116,32 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <div class="mb-2">
+                                        <b>Sắp xếp</b>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio-sort" id="flexRadioDefault1"
+                                        value="gia-tang-dan" >
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            giá tăng dần
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio-sort" id="flexRadioDefault2"
+                                        value="gia-giam-dan">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            giá giảm dần
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radio-sort" id="flexRadioDefault3" checked
+                                        value="khong-sap-xep">
+                                        <label class="form-check-label" for="flexRadioDefault3">
+                                            Không sắp xếp
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="mb-2">
                                     <button class="btn border-secondary px-4 py-3 rounded-pill text-primary w-50" type="button" id="btnFilter">
                                         Lọc sản phẩm
@@ -162,20 +188,20 @@
                                 <c:if test="${totalPages > 0}" >
                                 <div class="pagination d-flex justify-content-center mt-5">
                                     <li class="page-item rounded" style="${currentPage eq 1 ? "display:none" : ""}">
-                                        <a class="page-link" href="/products?page=${currentPage - 1}" aria-label="Previous">
+                                        <a class="page-link" href="/products?page=${currentPage - 1}${queryString}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                             <span class="sr-only">Previous</span>
                                         </a>
                                     </li>
                                     <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
                                         <li class="page-item rounded" style="${totalPages eq 1 ? "display:none" : ""}">
-                                            <a class="page-link ${currentPage eq (loop.index + 1) ? "active" : ""}" href="/products?page=${loop.index + 1}">
+                                            <a class="page-link ${currentPage eq (loop.index + 1) ? "active" : ""}" href="/products?page=${loop.index + 1}${queryString}">
                                                     ${loop.index + 1}
                                             </a>
                                         </li>
                                     </c:forEach>
                                     <li class="page-item rounded" style="${currentPage eq totalPages ? "display:none" : ""}">
-                                        <a class="page-link" href="/products?page=${currentPage + 1}" aria-label="Next">
+                                        <a class="page-link" href="/products?page=${currentPage + 1}${queryString}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                             <span class="sr-only">Next</span>
                                         </a>
